@@ -135,5 +135,5 @@ export const parse = (input: string) => {
     const parsed = _parse(filteredTokens);
 
     // modified to structured
-    return structure(parsed).children;
+    return structure(parsed).children || undefined;
 };
