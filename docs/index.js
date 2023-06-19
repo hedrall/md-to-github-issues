@@ -5221,7 +5221,7 @@
     return structure(parsed).children;
   };
 
-  // demo/index.ts
+  // docs/index.ts
   var initialInput = `# Title
 
 - a
