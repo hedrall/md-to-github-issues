@@ -1,8 +1,8 @@
 # md-list-parser
 
-This is a simple parser for markdown list.
+This is a simple parser for Markdown list.
 
-# example
+# how to use (example)
 
 ```ts
 import * as LP from 'md-list-parser';
