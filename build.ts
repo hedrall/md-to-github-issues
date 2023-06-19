@@ -7,6 +7,7 @@ build({
     outfile: path.resolve(__dirname, './dist/index.js'),
     minify: false,
     platform: 'node',
+
     tsconfig: path.resolve(__dirname, './tsconfig.json'),
 })
 
