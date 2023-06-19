@@ -2,6 +2,8 @@
 
 This is a simple parser for Markdown list.
 
+[live demo](https://hedrall.github.io/md-list-parser/)
+
 # how to use (example)
 
 ```ts
