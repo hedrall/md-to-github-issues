@@ -60,6 +60,22 @@ const groupBy = (tokens: Token[]) => {
     return res;
 }
 
+const filterTokensOnlyBulletList = (tokens: Token[]) => {
+    const filtered: Token[] = [];
+
+    for (let i = 0; i < tokens.length; i++) {
+        const token = tokens[i];
+
+        if (token.type === 'bullet_list_open') {
+            const {indexOfClose} = pickTokensOf('bullet_list', tokens, i);
+            filtered.push(...tokens.slice(i, indexOfClose + 1));
+            i = indexOfClose;
+        }
+    }
+
+    return filtered;
+}
+
 type ParsedList = {
     paragraphs: Token[][],
     bulletLists: ParsedList[],
@@ -70,7 +86,6 @@ function getContentOfParagraphs(paragraphs: Token[]) {
     return paragraphs.map(p => p.content).join('\n');
 }
 
-// 構造化する
 type Structured = {
     title: string,
     children?: Structured[] | null,
@@ -94,16 +109,17 @@ const structure = (parsed: ParsedList): Structured => {
     };
 }
 
-const parse = (tokens: Token[]): ParsedList => {
+const _parse = (tokens: Token[]): ParsedList => {
     const groups = groupBy(tokens);
     return {
         ...groups,
-        bulletLists: groups.bulletLists.map(parse),
-        listItems: groups.listItems.map(parse),
+        bulletLists: groups.bulletLists.map(_parse),
+        listItems: groups.listItems.map(_parse),
     }
 }
 
-export const parseMarkdownList = (input: string, noEmit = false) => {
+export type Parsed = Structured;
+export const parse = (input: string) => {
     // tokenize
     const tokens = md.parse(input, {}).map((token, index) => {
         return {
@@ -113,13 +129,11 @@ export const parseMarkdownList = (input: string, noEmit = false) => {
             markup: token.markup,
         };
     });
-    if (!noEmit) fs.writeFileSync(path.resolve(__dirname, './tokens.json'), JSON.stringify(tokens, null, 2));
 
+    const filteredTokens = filterTokensOnlyBulletList(tokens);
     // parse to ast like
-    const res = parse(tokens);
-    if (!noEmit) fs.writeFileSync(path.resolve(__dirname, './res.json'), JSON.stringify(res, null, 2));
+    const parsed = _parse(filteredTokens);
 
-    const res2 = structure(res);
-    if (!noEmit) fs.writeFileSync(path.resolve(__dirname, './res2.json'), JSON.stringify(res2, null, 2));
-    return res2;
+    // modified to structured
+    return structure(parsed).children;
 };

@@ -1,0 +1,174 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`+ list 1`] = `
+[
+  {
+    "children": [
+      {
+        "title": "2",
+      },
+      {
+        "title": "3",
+      },
+    ],
+    "title": "1",
+  },
+]
+`;
+
+exports[`README case 1`] = `
+[
+  {
+    "children": [
+      {
+        "title": "b",
+      },
+      {
+        "children": [
+          {
+            "title": "e",
+          },
+        ],
+        "title": "d",
+      },
+    ],
+    "title": "a",
+  },
+  {
+    "title": "f",
+  },
+]
+`;
+
+exports[`main case 1`] = `
+[
+  {
+    "children": [
+      {
+        "title": "a-body",
+      },
+    ],
+    "title": "(4) a",
+  },
+  {
+    "children": [
+      {
+        "title": "b-body",
+      },
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "title": "(b1-1-body)",
+              },
+            ],
+            "title": "(1) b1-1",
+          },
+          {
+            "children": [
+              {
+                "title": "b1-2-body",
+              },
+            ],
+            "title": "(1) b1-2",
+          },
+        ],
+        "title": "(2) b1",
+      },
+      {
+        "children": [
+          {
+            "title": "b2-body",
+          },
+        ],
+        "title": "(2) b2",
+      },
+      {
+        "title": "b-body-2",
+      },
+    ],
+    "title": "(4) b",
+  },
+]
+`;
+
+exports[`mixed with other markdown 1`] = `
+[
+  {
+    "children": [
+      {
+        "title": "a-body",
+      },
+    ],
+    "title": "(4) a",
+  },
+  {
+    "children": [
+      {
+        "title": "b-body",
+      },
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "title": "(b1-1-body)",
+              },
+            ],
+            "title": "(1) b1-1",
+          },
+          {
+            "children": [
+              {
+                "title": "b1-2-body",
+              },
+            ],
+            "title": "(1) b1-2",
+          },
+        ],
+        "title": "(2) b1",
+      },
+      {
+        "children": [
+          {
+            "title": "b2-body",
+          },
+        ],
+        "title": "(2) b2",
+      },
+      {
+        "title": "b-body-2",
+      },
+    ],
+    "title": "(4) b",
+  },
+]
+`;
+
+exports[`two lists 1`] = `
+[
+  {
+    "children": [
+      {
+        "title": "2",
+      },
+      {
+        "title": "3",
+      },
+    ],
+    "title": "1",
+  },
+  {
+    "title": "a",
+  },
+  {
+    "children": [
+      {
+        "title": "c",
+      },
+    ],
+    "title": "b",
+  },
+]
+`;

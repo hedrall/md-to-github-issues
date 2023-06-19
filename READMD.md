@@ -11,12 +11,33 @@ const input = `
   - b
   - d
     - e
+- f
 `;
 
 const result = LP.parse(input);
-/**
- * tobe
- * [
- * ]
- */
+```
+
+to get 
+```ts
+const result = [
+    {
+        title: 'a',
+        children: [
+            {
+                title: 'b',
+            },
+            {
+                title: 'd',
+                children: [
+                    {
+                        title: 'e',
+                    },
+                ],
+            },
+        ],
+    },
+    {
+        title: 'f',
+    },
+]
 ```
