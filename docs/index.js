@@ -5218,7 +5218,7 @@
     });
     const filteredTokens = filterTokensOnlyBulletList(tokens);
     const parsed = _parse(filteredTokens);
-    return structure(parsed).children;
+    return structure(parsed).children || void 0;
   };
 
   // docs/index.ts
