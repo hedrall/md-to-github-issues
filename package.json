@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc && node -r esbuild-register build.ts",
+    "build": "tsc",
     "test": "jest"
   },
   "author": "hedrall",
