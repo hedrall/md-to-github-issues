@@ -4,6 +4,10 @@ This is a tool to write Github issues with markdown list.
 
 [live demo](https://hedrall.github.io/md-to-github-issues/)
 
+# install
+
+`npm install md-to-github-issues`
+
 # how to use (example)
 
 ## just parse
