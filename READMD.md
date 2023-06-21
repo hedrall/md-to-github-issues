@@ -1,6 +1,6 @@
 # md-to-github-issues
 
-This is a simple parser for Markdown list.
+This is a tool to write Github issues with markdown list.
 
 [live demo](https://hedrall.github.io/md-to-github-issues/)
 

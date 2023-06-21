@@ -1,7 +1,7 @@
 {
   "name": "md-to-github-issues",
   "version": "1.0.6",
-  "description": "Simple parser for markdown list",
+  "description": "Write Github issues with markdown list",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
