@@ -1,21 +1,21 @@
 import * as MTGI from '../src/index';
 
-const initialInput = `# Title
+const initialInput = `# Task Breakdown
 
-- (4) a
-    - a-body
-      - a-body-1
-      - a-body-2
-- (4) b
-    - b-body
-    - (2) b1
-        - (1) b1-1
-            - (b1-1-body)
-        - (1) b1-2
-            - b1-2-body
-    - (2) b2
-        - b2-body
-    - b-body-2
+- (8) Implement new Feature
+    - (4) Database
+        - Create new table
+          - \`users\` table
+          - \`customers\` table
+    - (4) Backend
+        - Create new API
+        - (2) Create user API
+            - (1) implementation
+                - (memo ...)
+            - (1) test
+                - (momo memo ...)
+        - (2) Create Customer API
+            - (memo memo memo ...)
 `;
 window.addEventListener('load', () => {
     const render = (input) => {

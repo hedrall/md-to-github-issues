@@ -1,7 +1,6 @@
 import * as MTGI from '../src/index';
 
-test('README case', () => {
-    const input = `
+const input = `
 - (8) Implement new Feature
     - (4) Database
         - Create new table
@@ -17,7 +16,19 @@ test('README case', () => {
         - (2) Create Customer API
             - (memo memo memo ...)
 `;
-    expect(
-        MTGI.extractIssues(MTGI.parse(input))
-    ).toMatchSnapshot();
-});
+
+console.table(
+    MTGI.parse(input).map(i =>{
+        const {body, parents, children, ...rest} = i;
+        let shortBody = body.slice(0, 20);
+        return {
+            ...rest,
+            body: shortBody + (shortBody.length === 20 ? '...' : ''),
+        }
+    })
+)
+console.log(
+    MTGI.extractIssues(
+        MTGI.parse(input)
+    )
+)

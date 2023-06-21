@@ -89,7 +89,7 @@ const parseItems = (parsed: Structured[], parents: Item[] = []): Item[] => {
     if (!issueRegExp.test(title)) return [];
     // 親Node
     const node: Item = {
-      title,
+      title: title.replace(/\((\d+)\) /, ''),
       paths: parents.map(p => p.title),
       depth: parents.length + 1,
       body: children ? toMd(children) : '',
