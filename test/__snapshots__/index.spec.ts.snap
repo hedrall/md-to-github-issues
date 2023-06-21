@@ -1,174 +1,913 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`+ list 1`] = `
-[
-  {
-    "children": [
-      {
-        "title": "2",
-      },
-      {
-        "title": "3",
-      },
-    ],
-    "title": "1",
-  },
-]
-`;
-
 exports[`README case 1`] = `
 [
   {
-    "children": [
-      {
-        "title": "b",
-      },
-      {
-        "children": [
-          {
-            "title": "e",
-          },
-        ],
-        "title": "d",
-      },
-    ],
-    "title": "a",
-  },
-  {
-    "title": "f",
-  },
-]
-`;
-
-exports[`main case 1`] = `
-[
-  {
-    "children": [
-      {
-        "title": "a-body",
-      },
-    ],
+    "body": "- a-body
+  - a-body-1
+  - a-body-2",
+    "children": [],
+    "depth": 1,
+    "estimates": 4,
+    "isEnd": true,
+    "parents": [],
+    "paths": [],
     "title": "(4) a",
   },
   {
+    "body": "- b-body
+- (2) b1
+  - (1) b1-1
+    - (b1-1-body)
+  - (1) b1-2
+    - b1-2-body
+- (2) b2
+  - b2-body
+- b-body-2",
     "children": [
       {
-        "title": "b-body",
-      },
-      {
+        "body": "- (1) b1-1
+  - (b1-1-body)
+- (1) b1-2
+  - b1-2-body",
         "children": [
           {
-            "children": [
-              {
-                "title": "(b1-1-body)",
-              },
+            "body": "- (b1-1-body)",
+            "children": [],
+            "depth": 3,
+            "estimates": 1,
+            "isEnd": true,
+            "parents": [
+              [Circular],
+              [Circular],
+            ],
+            "paths": [
+              "(4) b",
+              "(2) b1",
             ],
             "title": "(1) b1-1",
           },
           {
-            "children": [
-              {
-                "title": "b1-2-body",
-              },
+            "body": "- b1-2-body",
+            "children": [],
+            "depth": 3,
+            "estimates": 1,
+            "isEnd": true,
+            "parents": [
+              [Circular],
+              [Circular],
+            ],
+            "paths": [
+              "(4) b",
+              "(2) b1",
             ],
             "title": "(1) b1-2",
           },
         ],
+        "depth": 2,
+        "estimates": 2,
+        "isEnd": false,
+        "parents": [
+          [Circular],
+        ],
+        "paths": [
+          "(4) b",
+        ],
         "title": "(2) b1",
       },
       {
-        "children": [
+        "body": "- (b1-1-body)",
+        "children": [],
+        "depth": 3,
+        "estimates": 1,
+        "isEnd": true,
+        "parents": [
+          [Circular],
           {
-            "title": "b2-body",
+            "body": "- (1) b1-1
+  - (b1-1-body)
+- (1) b1-2
+  - b1-2-body",
+            "children": [
+              [Circular],
+              {
+                "body": "- b1-2-body",
+                "children": [],
+                "depth": 3,
+                "estimates": 1,
+                "isEnd": true,
+                "parents": [Circular],
+                "paths": [
+                  "(4) b",
+                  "(2) b1",
+                ],
+                "title": "(1) b1-2",
+              },
+            ],
+            "depth": 2,
+            "estimates": 2,
+            "isEnd": false,
+            "parents": [
+              [Circular],
+            ],
+            "paths": [
+              "(4) b",
+            ],
+            "title": "(2) b1",
           },
+        ],
+        "paths": [
+          "(4) b",
+          "(2) b1",
+        ],
+        "title": "(1) b1-1",
+      },
+      {
+        "body": "- b1-2-body",
+        "children": [],
+        "depth": 3,
+        "estimates": 1,
+        "isEnd": true,
+        "parents": [
+          [Circular],
+          {
+            "body": "- (1) b1-1
+  - (b1-1-body)
+- (1) b1-2
+  - b1-2-body",
+            "children": [
+              {
+                "body": "- (b1-1-body)",
+                "children": [],
+                "depth": 3,
+                "estimates": 1,
+                "isEnd": true,
+                "parents": [Circular],
+                "paths": [
+                  "(4) b",
+                  "(2) b1",
+                ],
+                "title": "(1) b1-1",
+              },
+              [Circular],
+            ],
+            "depth": 2,
+            "estimates": 2,
+            "isEnd": false,
+            "parents": [
+              [Circular],
+            ],
+            "paths": [
+              "(4) b",
+            ],
+            "title": "(2) b1",
+          },
+        ],
+        "paths": [
+          "(4) b",
+          "(2) b1",
+        ],
+        "title": "(1) b1-2",
+      },
+      {
+        "body": "- b2-body",
+        "children": [],
+        "depth": 2,
+        "estimates": 2,
+        "isEnd": true,
+        "parents": [
+          [Circular],
+        ],
+        "paths": [
+          "(4) b",
         ],
         "title": "(2) b2",
       },
-      {
-        "title": "b-body-2",
-      },
     ],
+    "depth": 1,
+    "estimates": 4,
+    "isEnd": false,
+    "parents": [],
+    "paths": [],
     "title": "(4) b",
   },
-]
-`;
-
-exports[`mixed with other markdown 1`] = `
-[
   {
+    "body": "- (1) b1-1
+  - (b1-1-body)
+- (1) b1-2
+  - b1-2-body",
     "children": [
       {
-        "title": "a-body",
+        "body": "- (b1-1-body)",
+        "children": [],
+        "depth": 3,
+        "estimates": 1,
+        "isEnd": true,
+        "parents": [
+          {
+            "body": "- b-body
+- (2) b1
+  - (1) b1-1
+    - (b1-1-body)
+  - (1) b1-2
+    - b1-2-body
+- (2) b2
+  - b2-body
+- b-body-2",
+            "children": [
+              [Circular],
+              [Circular],
+              {
+                "body": "- b1-2-body",
+                "children": [],
+                "depth": 3,
+                "estimates": 1,
+                "isEnd": true,
+                "parents": [Circular],
+                "paths": [
+                  "(4) b",
+                  "(2) b1",
+                ],
+                "title": "(1) b1-2",
+              },
+              {
+                "body": "- b2-body",
+                "children": [],
+                "depth": 2,
+                "estimates": 2,
+                "isEnd": true,
+                "parents": [
+                  [Circular],
+                ],
+                "paths": [
+                  "(4) b",
+                ],
+                "title": "(2) b2",
+              },
+            ],
+            "depth": 1,
+            "estimates": 4,
+            "isEnd": false,
+            "parents": [],
+            "paths": [],
+            "title": "(4) b",
+          },
+          [Circular],
+        ],
+        "paths": [
+          "(4) b",
+          "(2) b1",
+        ],
+        "title": "(1) b1-1",
+      },
+      {
+        "body": "- b1-2-body",
+        "children": [],
+        "depth": 3,
+        "estimates": 1,
+        "isEnd": true,
+        "parents": [
+          {
+            "body": "- b-body
+- (2) b1
+  - (1) b1-1
+    - (b1-1-body)
+  - (1) b1-2
+    - b1-2-body
+- (2) b2
+  - b2-body
+- b-body-2",
+            "children": [
+              [Circular],
+              {
+                "body": "- (b1-1-body)",
+                "children": [],
+                "depth": 3,
+                "estimates": 1,
+                "isEnd": true,
+                "parents": [Circular],
+                "paths": [
+                  "(4) b",
+                  "(2) b1",
+                ],
+                "title": "(1) b1-1",
+              },
+              [Circular],
+              {
+                "body": "- b2-body",
+                "children": [],
+                "depth": 2,
+                "estimates": 2,
+                "isEnd": true,
+                "parents": [
+                  [Circular],
+                ],
+                "paths": [
+                  "(4) b",
+                ],
+                "title": "(2) b2",
+              },
+            ],
+            "depth": 1,
+            "estimates": 4,
+            "isEnd": false,
+            "parents": [],
+            "paths": [],
+            "title": "(4) b",
+          },
+          [Circular],
+        ],
+        "paths": [
+          "(4) b",
+          "(2) b1",
+        ],
+        "title": "(1) b1-2",
       },
     ],
-    "title": "(4) a",
-  },
-  {
-    "children": [
+    "depth": 2,
+    "estimates": 2,
+    "isEnd": false,
+    "parents": [
       {
-        "title": "b-body",
-      },
-      {
+        "body": "- b-body
+- (2) b1
+  - (1) b1-1
+    - (b1-1-body)
+  - (1) b1-2
+    - b1-2-body
+- (2) b2
+  - b2-body
+- b-body-2",
         "children": [
+          [Circular],
           {
-            "children": [
-              {
-                "title": "(b1-1-body)",
-              },
+            "body": "- (b1-1-body)",
+            "children": [],
+            "depth": 3,
+            "estimates": 1,
+            "isEnd": true,
+            "parents": [
+              [Circular],
+              [Circular],
+            ],
+            "paths": [
+              "(4) b",
+              "(2) b1",
             ],
             "title": "(1) b1-1",
           },
           {
+            "body": "- b1-2-body",
+            "children": [],
+            "depth": 3,
+            "estimates": 1,
+            "isEnd": true,
+            "parents": [
+              [Circular],
+              [Circular],
+            ],
+            "paths": [
+              "(4) b",
+              "(2) b1",
+            ],
+            "title": "(1) b1-2",
+          },
+          {
+            "body": "- b2-body",
+            "children": [],
+            "depth": 2,
+            "estimates": 2,
+            "isEnd": true,
+            "parents": [Circular],
+            "paths": [
+              "(4) b",
+            ],
+            "title": "(2) b2",
+          },
+        ],
+        "depth": 1,
+        "estimates": 4,
+        "isEnd": false,
+        "parents": [],
+        "paths": [],
+        "title": "(4) b",
+      },
+    ],
+    "paths": [
+      "(4) b",
+    ],
+    "title": "(2) b1",
+  },
+  {
+    "body": "- (b1-1-body)",
+    "children": [],
+    "depth": 3,
+    "estimates": 1,
+    "isEnd": true,
+    "parents": [
+      {
+        "body": "- b-body
+- (2) b1
+  - (1) b1-1
+    - (b1-1-body)
+  - (1) b1-2
+    - b1-2-body
+- (2) b2
+  - b2-body
+- b-body-2",
+        "children": [
+          {
+            "body": "- (1) b1-1
+  - (b1-1-body)
+- (1) b1-2
+  - b1-2-body",
             "children": [
+              [Circular],
               {
-                "title": "b1-2-body",
+                "body": "- b1-2-body",
+                "children": [],
+                "depth": 3,
+                "estimates": 1,
+                "isEnd": true,
+                "parents": [Circular],
+                "paths": [
+                  "(4) b",
+                  "(2) b1",
+                ],
+                "title": "(1) b1-2",
               },
+            ],
+            "depth": 2,
+            "estimates": 2,
+            "isEnd": false,
+            "parents": [
+              [Circular],
+            ],
+            "paths": [
+              "(4) b",
+            ],
+            "title": "(2) b1",
+          },
+          [Circular],
+          {
+            "body": "- b1-2-body",
+            "children": [],
+            "depth": 3,
+            "estimates": 1,
+            "isEnd": true,
+            "parents": [Circular],
+            "paths": [
+              "(4) b",
+              "(2) b1",
+            ],
+            "title": "(1) b1-2",
+          },
+          {
+            "body": "- b2-body",
+            "children": [],
+            "depth": 2,
+            "estimates": 2,
+            "isEnd": true,
+            "parents": [
+              [Circular],
+            ],
+            "paths": [
+              "(4) b",
+            ],
+            "title": "(2) b2",
+          },
+        ],
+        "depth": 1,
+        "estimates": 4,
+        "isEnd": false,
+        "parents": [],
+        "paths": [],
+        "title": "(4) b",
+      },
+      {
+        "body": "- (1) b1-1
+  - (b1-1-body)
+- (1) b1-2
+  - b1-2-body",
+        "children": [
+          [Circular],
+          {
+            "body": "- b1-2-body",
+            "children": [],
+            "depth": 3,
+            "estimates": 1,
+            "isEnd": true,
+            "parents": [Circular],
+            "paths": [
+              "(4) b",
+              "(2) b1",
             ],
             "title": "(1) b1-2",
           },
         ],
-        "title": "(2) b1",
-      },
-      {
-        "children": [
+        "depth": 2,
+        "estimates": 2,
+        "isEnd": false,
+        "parents": [
           {
-            "title": "b2-body",
+            "body": "- b-body
+- (2) b1
+  - (1) b1-1
+    - (b1-1-body)
+  - (1) b1-2
+    - b1-2-body
+- (2) b2
+  - b2-body
+- b-body-2",
+            "children": [
+              [Circular],
+              [Circular],
+              {
+                "body": "- b1-2-body",
+                "children": [],
+                "depth": 3,
+                "estimates": 1,
+                "isEnd": true,
+                "parents": [Circular],
+                "paths": [
+                  "(4) b",
+                  "(2) b1",
+                ],
+                "title": "(1) b1-2",
+              },
+              {
+                "body": "- b2-body",
+                "children": [],
+                "depth": 2,
+                "estimates": 2,
+                "isEnd": true,
+                "parents": [Circular],
+                "paths": [
+                  "(4) b",
+                ],
+                "title": "(2) b2",
+              },
+            ],
+            "depth": 1,
+            "estimates": 4,
+            "isEnd": false,
+            "parents": [],
+            "paths": [],
+            "title": "(4) b",
           },
         ],
-        "title": "(2) b2",
-      },
-      {
-        "title": "b-body-2",
-      },
-    ],
-    "title": "(4) b",
-  },
-]
-`;
-
-exports[`two lists 1`] = `
-[
-  {
-    "children": [
-      {
-        "title": "2",
-      },
-      {
-        "title": "3",
+        "paths": [
+          "(4) b",
+        ],
+        "title": "(2) b1",
       },
     ],
-    "title": "1",
+    "paths": [
+      "(4) b",
+      "(2) b1",
+    ],
+    "title": "(1) b1-1",
   },
   {
-    "title": "a",
-  },
-  {
-    "children": [
+    "body": "- b1-2-body",
+    "children": [],
+    "depth": 3,
+    "estimates": 1,
+    "isEnd": true,
+    "parents": [
       {
-        "title": "c",
+        "body": "- b-body
+- (2) b1
+  - (1) b1-1
+    - (b1-1-body)
+  - (1) b1-2
+    - b1-2-body
+- (2) b2
+  - b2-body
+- b-body-2",
+        "children": [
+          {
+            "body": "- (1) b1-1
+  - (b1-1-body)
+- (1) b1-2
+  - b1-2-body",
+            "children": [
+              {
+                "body": "- (b1-1-body)",
+                "children": [],
+                "depth": 3,
+                "estimates": 1,
+                "isEnd": true,
+                "parents": [Circular],
+                "paths": [
+                  "(4) b",
+                  "(2) b1",
+                ],
+                "title": "(1) b1-1",
+              },
+              [Circular],
+            ],
+            "depth": 2,
+            "estimates": 2,
+            "isEnd": false,
+            "parents": [
+              [Circular],
+            ],
+            "paths": [
+              "(4) b",
+            ],
+            "title": "(2) b1",
+          },
+          {
+            "body": "- (b1-1-body)",
+            "children": [],
+            "depth": 3,
+            "estimates": 1,
+            "isEnd": true,
+            "parents": [Circular],
+            "paths": [
+              "(4) b",
+              "(2) b1",
+            ],
+            "title": "(1) b1-1",
+          },
+          [Circular],
+          {
+            "body": "- b2-body",
+            "children": [],
+            "depth": 2,
+            "estimates": 2,
+            "isEnd": true,
+            "parents": [
+              [Circular],
+            ],
+            "paths": [
+              "(4) b",
+            ],
+            "title": "(2) b2",
+          },
+        ],
+        "depth": 1,
+        "estimates": 4,
+        "isEnd": false,
+        "parents": [],
+        "paths": [],
+        "title": "(4) b",
+      },
+      {
+        "body": "- (1) b1-1
+  - (b1-1-body)
+- (1) b1-2
+  - b1-2-body",
+        "children": [
+          {
+            "body": "- (b1-1-body)",
+            "children": [],
+            "depth": 3,
+            "estimates": 1,
+            "isEnd": true,
+            "parents": [Circular],
+            "paths": [
+              "(4) b",
+              "(2) b1",
+            ],
+            "title": "(1) b1-1",
+          },
+          [Circular],
+        ],
+        "depth": 2,
+        "estimates": 2,
+        "isEnd": false,
+        "parents": [
+          {
+            "body": "- b-body
+- (2) b1
+  - (1) b1-1
+    - (b1-1-body)
+  - (1) b1-2
+    - b1-2-body
+- (2) b2
+  - b2-body
+- b-body-2",
+            "children": [
+              [Circular],
+              {
+                "body": "- (b1-1-body)",
+                "children": [],
+                "depth": 3,
+                "estimates": 1,
+                "isEnd": true,
+                "parents": [Circular],
+                "paths": [
+                  "(4) b",
+                  "(2) b1",
+                ],
+                "title": "(1) b1-1",
+              },
+              [Circular],
+              {
+                "body": "- b2-body",
+                "children": [],
+                "depth": 2,
+                "estimates": 2,
+                "isEnd": true,
+                "parents": [Circular],
+                "paths": [
+                  "(4) b",
+                ],
+                "title": "(2) b2",
+              },
+            ],
+            "depth": 1,
+            "estimates": 4,
+            "isEnd": false,
+            "parents": [],
+            "paths": [],
+            "title": "(4) b",
+          },
+        ],
+        "paths": [
+          "(4) b",
+        ],
+        "title": "(2) b1",
       },
     ],
-    "title": "b",
+    "paths": [
+      "(4) b",
+      "(2) b1",
+    ],
+    "title": "(1) b1-2",
+  },
+  {
+    "body": "- b2-body",
+    "children": [],
+    "depth": 2,
+    "estimates": 2,
+    "isEnd": true,
+    "parents": [
+      {
+        "body": "- b-body
+- (2) b1
+  - (1) b1-1
+    - (b1-1-body)
+  - (1) b1-2
+    - b1-2-body
+- (2) b2
+  - b2-body
+- b-body-2",
+        "children": [
+          {
+            "body": "- (1) b1-1
+  - (b1-1-body)
+- (1) b1-2
+  - b1-2-body",
+            "children": [
+              {
+                "body": "- (b1-1-body)",
+                "children": [],
+                "depth": 3,
+                "estimates": 1,
+                "isEnd": true,
+                "parents": [
+                  [Circular],
+                  [Circular],
+                ],
+                "paths": [
+                  "(4) b",
+                  "(2) b1",
+                ],
+                "title": "(1) b1-1",
+              },
+              {
+                "body": "- b1-2-body",
+                "children": [],
+                "depth": 3,
+                "estimates": 1,
+                "isEnd": true,
+                "parents": [
+                  [Circular],
+                  [Circular],
+                ],
+                "paths": [
+                  "(4) b",
+                  "(2) b1",
+                ],
+                "title": "(1) b1-2",
+              },
+            ],
+            "depth": 2,
+            "estimates": 2,
+            "isEnd": false,
+            "parents": [Circular],
+            "paths": [
+              "(4) b",
+            ],
+            "title": "(2) b1",
+          },
+          {
+            "body": "- (b1-1-body)",
+            "children": [],
+            "depth": 3,
+            "estimates": 1,
+            "isEnd": true,
+            "parents": [
+              [Circular],
+              {
+                "body": "- (1) b1-1
+  - (b1-1-body)
+- (1) b1-2
+  - b1-2-body",
+                "children": [
+                  [Circular],
+                  {
+                    "body": "- b1-2-body",
+                    "children": [],
+                    "depth": 3,
+                    "estimates": 1,
+                    "isEnd": true,
+                    "parents": [Circular],
+                    "paths": [
+                      "(4) b",
+                      "(2) b1",
+                    ],
+                    "title": "(1) b1-2",
+                  },
+                ],
+                "depth": 2,
+                "estimates": 2,
+                "isEnd": false,
+                "parents": [Circular],
+                "paths": [
+                  "(4) b",
+                ],
+                "title": "(2) b1",
+              },
+            ],
+            "paths": [
+              "(4) b",
+              "(2) b1",
+            ],
+            "title": "(1) b1-1",
+          },
+          {
+            "body": "- b1-2-body",
+            "children": [],
+            "depth": 3,
+            "estimates": 1,
+            "isEnd": true,
+            "parents": [
+              [Circular],
+              {
+                "body": "- (1) b1-1
+  - (b1-1-body)
+- (1) b1-2
+  - b1-2-body",
+                "children": [
+                  {
+                    "body": "- (b1-1-body)",
+                    "children": [],
+                    "depth": 3,
+                    "estimates": 1,
+                    "isEnd": true,
+                    "parents": [Circular],
+                    "paths": [
+                      "(4) b",
+                      "(2) b1",
+                    ],
+                    "title": "(1) b1-1",
+                  },
+                  [Circular],
+                ],
+                "depth": 2,
+                "estimates": 2,
+                "isEnd": false,
+                "parents": [Circular],
+                "paths": [
+                  "(4) b",
+                ],
+                "title": "(2) b1",
+              },
+            ],
+            "paths": [
+              "(4) b",
+              "(2) b1",
+            ],
+            "title": "(1) b1-2",
+          },
+          [Circular],
+        ],
+        "depth": 1,
+        "estimates": 4,
+        "isEnd": false,
+        "parents": [],
+        "paths": [],
+        "title": "(4) b",
+      },
+    ],
+    "paths": [
+      "(4) b",
+    ],
+    "title": "(2) b2",
   },
 ]
 `;

@@ -1,19 +1,19 @@
 {
-  "name": "md-list-parser",
+  "name": "md-to-github-issues",
   "version": "1.0.6",
   "description": "Simple parser for markdown list",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
+    "build:demo": "node -r esbuild-register build.ts",
     "test": "jest"
   },
   "author": "hedrall",
   "license": "MIT",
-  "repository": "https://github.com/hedrall/md-list-parser",
+  "repository": "https://github.com/hedrall/md-to-github-issues",
   "devDependencies": {
     "@types/jest": "^29.5.2",
-    "@types/markdown-it": "^12.2.3",
     "@types/node": "^20.3.1",
     "esbuild": "^0.18.4",
     "esbuild-jest": "^0.5.0",
@@ -23,6 +23,7 @@
     "typescript": "^5.1.3"
   },
   "dependencies": {
-    "markdown-it": "12"
+    "markdown-it": "12",
+    "md-list-parser": "^1.0.6"
   }
 }

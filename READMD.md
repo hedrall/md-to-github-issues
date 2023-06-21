@@ -1,45 +1,33 @@
-# md-list-parser
+# md-to-github-issues
 
 This is a simple parser for Markdown list.
 
-[live demo](https://hedrall.github.io/md-list-parser/)
+[live demo](https://hedrall.github.io/md-to-github-issues/)
 
 # how to use (example)
 
 ```ts
-import * as LP from 'md-list-parser';
+import * as MDTI from 'md-to-github-issues';
 const input = `
-- a
-  - b
-  - d
-    - e
-- f
+- (4) a
+    - a-body
+      - a-body-1
+      - a-body-2
+- (4) b
+    - b-body
+    - (2) b1
+        - (1) b1-1
+            - (b1-1-body)
+        - (1) b1-2
+            - b1-2-body
+    - (2) b2
+        - b2-body
+    - b-body-2
 `;
 
-const result = LP.parse(input);
+const result = MDTI.parse(input);
 ```
 
 to get 
-```ts
-const result = [
-    {
-        title: 'a',
-        children: [
-            {
-                title: 'b',
-            },
-            {
-                title: 'd',
-                children: [
-                    {
-                        title: 'e',
-                    },
-                ],
-            },
-        ],
-    },
-    {
-        title: 'f',
-    },
-]
-```
+
+![result](images/22a89b47.png)

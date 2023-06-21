@@ -1,139 +1,124 @@
-import MarkdownIt from 'markdown-it';
-import * as fs from "fs";
-import * as path from "path";
+import { parse as _parse } from 'md-list-parser';
+const input = `
+    
+inline 1
 
-const md = new MarkdownIt();
+# heading1
+## heading2
 
-type ListItem = {
-    inline: string,
-    body: string[],
-    children: ListItem[],
+\`\`\`
+    code block
+\`\`\`
+
+
+- (4) a
+    - a-body
+      - a-body-1
+      - a-body-2
+- (4) b
+    - b-body
+    - (2) b1
+        - (1) b1-1
+            - (b1-1-body)
+        - (1) b1-2
+            - b1-2-body
+    - (2) b2
+        - b2-body
+    - b-body-2
+    
+    
+### heading3
+
+inline 2
+`;
+
+type Item = {
+  title: string;
+  paths: string[];
+  depth: number;
+  body: string;
+  estimates: number | null;
+  children: Item[];
+  parents: Item[];
+  isEnd: boolean;
 }
 
-type Token = {
-    index: number,
-    type: string,
-    content: string,
-    markup: string,
+const issueRegExp = /\((\d+)\).*$/;
+// const transformData = (parsed: ReturnType<typeof parse>, parents: Item[] = []): Item[] => {
+//   let output: Item[] = [];
+//
+//   parsed?.forEach(item => {
+//     const {title, children} = item;
+//     const paths = parents.map(p => p.title);
+//     let item = {
+//       title: title.replace(/\(\d+\)\s/, ''),
+//       paths,
+//       body: child.title,
+//       estimates: Number(title.match(/\((\d+)\)/)?.[1]) || null
+//     };
+//
+//     if (!children) return;
+//
+//     children.forEach(child => {
+//       if (child.children) {
+//         output = [...output, ...transformData([child], [...parents, item])];
+//       } else {
+//         output.push(item);
+//       }
+//     });
+//   });
+//
+//   return output;
+// };
+
+
+type Structured = Exclude<ReturnType<typeof _parse>, undefined>[number];
+
+const toMd = (parsed: Structured[], indent = 0): string => {
+  return parsed.map(item => {
+    const {title, children} = item;
+    return [
+        [' '.repeat(indent), '- ', title].join(''),
+        ...(children ? [toMd(children, indent + 2)] : []),
+    ].join('\n');
+  }).join('\n');
 };
-
-type ListNodeTypes = 'paragraph' | 'bullet_list' | 'list_item';
-const LIST_NODE_TYPE_COL_NAME_MAP = {
-    paragraph: 'paragraphs',
-    bullet_list: 'bulletLists',
-    list_item: 'listItems',
-} as const;
-
-const pickTokensOf = (type: string, tokens: Token[], indexOfOpen: number) => {
-    let index = indexOfOpen + 1;
-    let count = 1;
-    while(count > 0) {
-        const token = tokens[index];
-        if (token.type ===  `${type}_open`) count++;
-        if (token.type ===  `${type}_close`) count--;
-        index++;
-    }
-    const indexOfClose = index - 1;
-    return {
-        items: tokens.slice(indexOfOpen + 1, indexOfClose),
-        indexOfClose,
+const parseItems = (parsed: Structured[], parents: Item[] = []): Item[] => {
+  return parsed.flatMap(item => {
+    const { title, children } = item;
+    if (!issueRegExp.test(title)) return [];
+    // 親Node
+    const node: Item = {
+      title,
+      paths: parents.map(p => p.title),
+      depth: parents.length + 1,
+      body: children ? toMd(children) : '',
+      estimates: Number(title.match(issueRegExp)?.[1]) || null,
+      parents,
+      children: [],
+      isEnd: false,
     };
+    const childNodes = parseItems(children || [], [...parents, node]);
+    node.children.push(...childNodes);
+    node.isEnd = childNodes.length === 0;
+    return [node, ...childNodes];
+  });
 }
 
-// group by paragraph or bullet_list or list_item
-const groupBy = (tokens: Token[]) => {
-    const res = {
-        paragraphs: [] as Token[][],
-        bulletLists: [] as Token[][],
-        listItems: [] as Token[][],
-    }
-    for (let i = 0; i < tokens.length; i++) {
-        const token = tokens[i];
-        const type = token.type.match(/(paragraph|bullet_list|list_item)_open/)?.[1] as null | ListNodeTypes;
-
-        if (type) {
-            const {items, indexOfClose} = pickTokensOf(type, tokens, i);
-            res[LIST_NODE_TYPE_COL_NAME_MAP[type]].push(items);
-            i = indexOfClose;
-        }
-    }
-    return res;
-}
-
-const filterTokensOnlyBulletList = (tokens: Token[]) => {
-    const filtered: Token[] = [];
-
-    for (let i = 0; i < tokens.length; i++) {
-        const token = tokens[i];
-
-        if (token.type === 'bullet_list_open') {
-            const {indexOfClose} = pickTokensOf('bullet_list', tokens, i);
-            filtered.push(...tokens.slice(i, indexOfClose + 1));
-            i = indexOfClose;
-        }
-    }
-
-    return filtered;
-}
-
-type ParsedList = {
-    paragraphs: Token[][],
-    bulletLists: ParsedList[],
-    listItems: ParsedList[],
-}
-
-function getContentOfParagraphs(paragraphs: Token[]) {
-    return paragraphs.map(p => p.content).join('\n');
-}
-
-type Structured = {
-    title: string,
-    children?: Structured[] | null,
-}
-const structure = (parsed: ParsedList): Structured => {
-    const type = parsed.bulletLists.length ? 'has-bullet-list' : parsed.listItems.length ? 'has-list-item' : 'has-paragraph';
-    if (type === 'has-bullet-list') {
-        return {
-            title: parsed.paragraphs.map(getContentOfParagraphs).join('\n'),
-            children: parsed.bulletLists.flatMap(bl => bl.listItems.map(structure))
-        };
-    }
-    if (type === 'has-list-item') {
-        return {
-            title: '',
-            children: parsed.listItems.map(structure)
-        };
-    }
-    return {
-        title: parsed.paragraphs.map(getContentOfParagraphs).join('\n'),
-    };
-}
-
-const _parse = (tokens: Token[]): ParsedList => {
-    const groups = groupBy(tokens);
-    return {
-        ...groups,
-        bulletLists: groups.bulletLists.map(_parse),
-        listItems: groups.listItems.map(_parse),
-    }
-}
-
-export type Parsed = Structured;
 export const parse = (input: string) => {
-    // tokenize
-    const tokens = md.parse(input, {}).map((token, index) => {
-        return {
-            index,
-            type: token.type,
-            content: token.content,
-            markup: token.markup,
-        };
-    });
+  const _parsed = _parse(input);
+  if (!_parsed) return [];
 
-    const filteredTokens = filterTokensOnlyBulletList(tokens);
-    // parse to ast like
-    const parsed = _parse(filteredTokens);
-
-    // modified to structured
-    return structure(parsed).children || undefined;
+  return parseItems(_parsed);
 };
+
+export const extractIssues = (parsed: Item[]) => {
+  return parsed.filter(item => item.isEnd).map(i => {
+    const {title, paths, body, estimates} = i;
+    return {
+      title: [...paths, title].join(' > '),
+      body,
+      estimates,
+    }
+  });
+}
